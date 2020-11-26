@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Riverscape</string>
+    <string name="main_image_description">Currently selected image</string>
 </resources>
