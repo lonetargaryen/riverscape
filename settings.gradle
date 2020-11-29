@@ -1,2 +1,3 @@
+include ':riverscape'
 include ':app'
 rootProject.name = "Riverscape"
