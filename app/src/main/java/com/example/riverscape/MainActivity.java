@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void longClickDetected() {
         Toast.makeText(this, "Long press detected.", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, EditImageActivity.class);
+        startActivity(intent);
     }
 
     /** Called when the user taps the cameraButton */
