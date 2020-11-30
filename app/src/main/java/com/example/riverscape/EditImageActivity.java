@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -72,6 +75,30 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         super.onCreate(savedInstanceState);
         makeFullScreen();
         setContentView(R.layout.activity_edit_image);
+
+        Uri applyURI = getIntent().getParcelableExtra("imageUri");
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver() , applyURI);
+            int orientation = getIntent().getIntExtra("finalOrientation", 0);
+            Toast.makeText(this, "EditImage side orientation = " + orientation, Toast.LENGTH_LONG).show();
+            Matrix matrix = new Matrix();
+            if (orientation == 6) {
+                matrix.postRotate(90);
+            }
+            else if (orientation == 3) {
+                matrix.postRotate(180);
+            }
+            else if (orientation == 8) {
+                matrix.postRotate(270);
+            }
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true); // rotating bitmap
+            com.example.riverscape.PhotoEditorView image = findViewById(R.id.photoEditorView);
+            image.setmImgSource(bitmap);
+        } catch (Exception e) {
+            //handle exception
+            e.printStackTrace();
+            Toast.makeText(this, "Couldn't get bitmap from previous activity.", Toast.LENGTH_LONG).show();
+        }
 
         initViews();
 

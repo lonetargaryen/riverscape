@@ -130,6 +130,10 @@ public class PhotoEditorView extends RelativeLayout {
         return mImgSource;
     }
 
+    public void setmImgSource(Bitmap bmp) {
+        mImgSource.setImageBitmap(bmp);
+    }
+
     BrushDrawingView getBrushDrawingView() {
         return mBrushDrawingView;
     }

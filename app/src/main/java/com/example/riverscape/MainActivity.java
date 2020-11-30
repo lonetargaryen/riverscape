@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -20,6 +21,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -38,6 +40,7 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,8 +54,11 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int PICK_IMAGE = 100;
+    private static final int REQUEST = 112;
     String currentPhotoPath;
     private Bitmap mImageBitmap;
+    private Uri finalURI = null;
+    private int finalOrientation = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +77,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void longClickDetected() {
-        Toast.makeText(this, "Long press detected.", Toast.LENGTH_LONG).show();
+//        int width = mImageBitmap.getWidth();
+//        int height = mImageBitmap.getHeight();
+//
+//        int size = mImageBitmap.getRowBytes() * mImageBitmap.getHeight();
+//        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+//        mImageBitmap.copyPixelsToBuffer(byteBuffer);
+//        byte[] byteArray = byteBuffer.array();
+//        mImageBitmap.recycle();
+
+//        Toast.makeText(this, finalURI.toString(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, EditImageActivity.class);
+        intent.putExtra("imageUri", finalURI);
+        if (finalOrientation != 0) {
+            intent.putExtra("finalOrientation", finalOrientation);
+            Toast.makeText(this, "intent put extra", Toast.LENGTH_LONG).show();
+        }
         startActivity(intent);
     }
 
@@ -103,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Camera permissions were denied.", Toast.LENGTH_LONG).show();
             }
         }
+        else if (requestCode == REQUEST) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchCameraAndTakePicture();
+            } else {
+                Toast.makeText(this, "Storage permissions were denied.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void launchCameraAndTakePicture() {
@@ -120,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             Uri photoURI = FileProvider.getUriForFile(this,
                     "com.example.android.fileprovider",
                     photoFile);
+            finalURI = photoURI;
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
@@ -132,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             Uri imageUri = data.getData();
+            finalURI = imageUri;
+            Toast.makeText(this, "Image received.", Toast.LENGTH_LONG).show();
             ivShowImage.setImageURI(imageUri);
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -142,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                     ExifInterface exif = new ExifInterface(currentPhotoPath);
                     int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
                     Log.d("EXIF", "Exif: " + orientation);
+                    Toast.makeText(this, "MainActivity side orientation = " + orientation, Toast.LENGTH_LONG).show();
+                    finalOrientation = orientation;
                     Matrix matrix = new Matrix();
                     if (orientation == 6) {
                         matrix.postRotate(90);
@@ -172,6 +204,10 @@ public class MainActivity extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         Log.d("storageDir", storageDir.toString());
+        String[] PERMISSIONS = {android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (!hasPermissions(MainActivity.this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions((Activity) MainActivity.this, PERMISSIONS, REQUEST );
+        }
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -186,5 +222,16 @@ public class MainActivity extends AppCompatActivity {
     public void openGallery(View view) {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
