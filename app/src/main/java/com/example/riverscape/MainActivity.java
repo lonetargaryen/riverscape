@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("imageUri", finalURI);
         if (finalOrientation != 0) {
             intent.putExtra("finalOrientation", finalOrientation);
-//            Toast.makeText(this, "intent put extra", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "finalOrientation" + finalOrientation, Toast.LENGTH_LONG).show();
         }
         startActivity(intent);
     }
@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGallery(View view) {
+        finalOrientation = 0;
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
