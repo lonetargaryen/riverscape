@@ -77,21 +77,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void longClickDetected() {
-//        int width = mImageBitmap.getWidth();
-//        int height = mImageBitmap.getHeight();
-//
-//        int size = mImageBitmap.getRowBytes() * mImageBitmap.getHeight();
-//        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-//        mImageBitmap.copyPixelsToBuffer(byteBuffer);
-//        byte[] byteArray = byteBuffer.array();
-//        mImageBitmap.recycle();
-
-//        Toast.makeText(this, finalURI.toString(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, EditImageActivity.class);
         intent.putExtra("imageUri", finalURI);
         if (finalOrientation != 0) {
             intent.putExtra("finalOrientation", finalOrientation);
-            Toast.makeText(this, "intent put extra", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "intent put extra", Toast.LENGTH_LONG).show();
         }
         startActivity(intent);
     }
@@ -172,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     ExifInterface exif = new ExifInterface(currentPhotoPath);
                     int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
                     Log.d("EXIF", "Exif: " + orientation);
-                    Toast.makeText(this, "MainActivity side orientation = " + orientation, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, "MainActivity side orientation = " + orientation, Toast.LENGTH_LONG).show();
                     finalOrientation = orientation;
                     Matrix matrix = new Matrix();
                     if (orientation == 6) {

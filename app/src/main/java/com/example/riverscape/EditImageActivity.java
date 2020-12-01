@@ -80,7 +80,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver() , applyURI);
             int orientation = getIntent().getIntExtra("finalOrientation", 0);
-            Toast.makeText(this, "EditImage side orientation = " + orientation, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "EditImage side orientation = " + orientation, Toast.LENGTH_LONG).show();
             Matrix matrix = new Matrix();
             if (orientation == 6) {
                 matrix.postRotate(90);
