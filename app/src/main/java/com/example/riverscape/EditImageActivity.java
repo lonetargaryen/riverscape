@@ -155,11 +155,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         imgRedo = findViewById(R.id.imgRedo);
         imgRedo.setOnClickListener(this);
 
-        imgCamera = findViewById(R.id.imgCamera);
-        imgCamera.setOnClickListener(this);
-
-        imgGallery = findViewById(R.id.imgGallery);
-        imgGallery.setOnClickListener(this);
+//        imgCamera = findViewById(R.id.imgCamera);
+//        imgCamera.setOnClickListener(this);
+//
+//        imgGallery = findViewById(R.id.imgGallery);
+//        imgGallery.setOnClickListener(this);
 
         imgSave = findViewById(R.id.imgSave);
         imgSave.setOnClickListener(this);
@@ -225,17 +225,17 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 onBackPressed();
                 break;
 
-            case R.id.imgCamera:
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                break;
-
-            case R.id.imgGallery:
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_REQUEST);
-                break;
+//            case R.id.imgCamera:
+//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+//                break;
+//
+//            case R.id.imgGallery:
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_REQUEST);
+//                break;
         }
     }
 

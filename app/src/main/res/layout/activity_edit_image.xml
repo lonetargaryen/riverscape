@@ -5,7 +5,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/darkBlue"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
@@ -24,7 +24,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:photo_src="@drawable/got_s" />
+        app:photo_src="@drawable/ic_default_image" />
 
     <ImageView
         android:id="@+id/imgUndo"
@@ -47,26 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imgGallery"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:background="#99000000"
-        android:padding="8dp"
-        android:src="@drawable/ic_gallery"
-        app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgCamera"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:background="#99000000"
-        android:padding="8dp"
-        android:src="@drawable/ic_camera"
-        app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
-        app:layout_constraintStart_toEndOf="@id/imgGallery" />
-
-    <ImageView
         android:id="@+id/imgClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +62,7 @@
         android:id="@+id/rvConstraintTools"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/tool_bg"
+        android:background="@color/green_color_picker"
         android:orientation="horizontal"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
@@ -106,17 +86,22 @@
 
     <TextView
         android:id="@+id/txtCurrentTool"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_width="148dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/porcelain"
+        android:gravity="center"
         android:singleLine="true"
         android:text="@string/app_name"
-        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.2"
+        android:textColor="@color/candyPink" />
 
     <ImageView
         android:id="@+id/imgSave"

@@ -26,7 +26,6 @@ import com.example.riverscape.CustomEffect;
  *
  *
  * @version 0.1.1
- * @since 1/18/2018
  */
 
 public class PhotoEditorView extends RelativeLayout {
