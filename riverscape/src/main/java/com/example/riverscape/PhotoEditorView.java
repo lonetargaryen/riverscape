@@ -23,9 +23,6 @@ import com.example.riverscape.CustomEffect;
  * This ViewGroup will have the {@link BrushDrawingView} to draw paint on it with {@link ImageView}
  * which our source image
  * </p>
- *
- *
- * @version 0.1.1
  */
 
 public class PhotoEditorView extends RelativeLayout {

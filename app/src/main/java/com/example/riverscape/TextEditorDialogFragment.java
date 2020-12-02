@@ -20,10 +20,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * Created by deepika ...
- */
-
 public class TextEditorDialogFragment extends DialogFragment {
 
     public static final String TAG = TextEditorDialogFragment.class.getSimpleName();

@@ -9,18 +9,8 @@ import java.nio.IntBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-/**
- * <p>
- * Bitmap utility class to perform different transformation on bitmap
- * </p>
- */
 class BitmapUtil {
-    /**
-     * Remove transparency in edited bitmap
-     *
-     * @param source edited image
-     * @return bitmap without any transparency
-     */
+
     static Bitmap removeTransparency(Bitmap source) {
         int firstX = 0, firstY = 0;
         int lastX = source.getWidth();

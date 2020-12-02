@@ -9,12 +9,6 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-/**
- * Created on 18/01/2017.
- *
- * @author <a href="https://github.com/burhanrashid52">Burhanuddin Rashid</a>
- * <p></p>
- */
 class MultiTouchListener implements OnTouchListener {
 
     private static final int INVALID_POINTER_ID = -1;

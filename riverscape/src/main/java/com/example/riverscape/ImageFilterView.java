@@ -26,8 +26,6 @@ import static com.example.riverscape.PhotoFilter.*;
  * <p>
  * Filter Images using ImageFilterView
  * </p>
- *
- *
  */
 class ImageFilterView extends GLSurfaceView implements GLSurfaceView.Renderer {
 

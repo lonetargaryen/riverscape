@@ -14,9 +14,6 @@ import java.util.Map;
  * <p>
  * This class is used to wrap the styles to apply on the TextView on {@link PhotoEditor#addText(String, TextStyleBuilder)} and {@link PhotoEditor#editText(View, String, TextStyleBuilder)}
  * </p>
- *
- * @author <a href="https://github.com/Sulfkain">Christian Caballero</a>
- * @since 14/05/2019
  */
 public class TextStyleBuilder {
 

@@ -22,9 +22,6 @@ import java.util.List;
 
 import com.example.riverscape.PhotoFilter;
 
-/**
- *
- */
 public class FilterViewAdapter extends RecyclerView.Adapter<FilterViewAdapter.ViewHolder> {
 
     private FilterListener mFilterListener;

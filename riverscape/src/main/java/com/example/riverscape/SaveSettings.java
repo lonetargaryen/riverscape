@@ -5,8 +5,6 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 /**
- * @author <a href="https://github.com/burhanrashid52">Burhanuddin Rashid</a>
- * @since 8/8/2018
  * Builder Class to apply multiple save options
  */
 public class SaveSettings {
